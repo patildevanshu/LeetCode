@@ -19,33 +19,58 @@ class Solution {
 
 
         // time  optimized code O(n)
-        int n = nums.length;
-        int[] prefix = new int[n];
-        prefix[0] = 1;
-        int[] postfix = new int[n];
-        postfix[n-1] = 1;
-        int[] ans = new int[n];
+        // int n = nums.length;
+        // int[] prefix = new int[n];
+        // prefix[0] = 1;
+        // int[] postfix = new int[n];
+        // postfix[n-1] = 1;
+        // int[] ans = new int[n];
 
-        // calculate prefix
+        // // calculate prefix
+        // int prefixProduct = 1;
+        // for(int i=1 ; i<n ; i++){
+        //     prefixProduct *= nums[i-1];
+        //     prefix[i] = prefixProduct;
+        // }
+
+        // // calculating postfix
+        // int postfixProduct = 1;
+        // for(int i =n-2; i>=0 ; i--){
+        //     postfixProduct *= nums[i+1];
+        //     postfix[i] = postfixProduct;
+        // }
+
+        // // calculating final ans array
+        // for(int i=0; i<n ; i++){
+        //     ans[i] = prefix[i]*postfix[i];
+        // }
+
+        // return ans;
+
+
+
+
+        // space and time optimized code
+
+        // initiate prefix ans/prefix array
+        int[] prefix= new int[nums.length];
+
+        // calculate prefix aaray
         int prefixProduct = 1;
-        for(int i=1 ; i<n ; i++){
+        prefix[0] = 1;
+        for(int i=1 ; i<nums.length ; i++){
             prefixProduct *= nums[i-1];
             prefix[i] = prefixProduct;
         }
 
-        // calculating postfix
-        int postfixProduct = 1;
-        for(int i =n-2; i>=0 ; i--){
+        // now calculate postfixProduct and direct multiply it in ans/prefix array
+        int postfixProduct =1;
+        for(int i = nums.length -2 ; i>= 0 ; i--){
             postfixProduct *= nums[i+1];
-            postfix[i] = postfixProduct;
+            prefix[i] *= postfixProduct;
         }
 
-        // calculating final ans array
-        for(int i=0; i<n ; i++){
-            ans[i] = prefix[i]*postfix[i];
-        }
-
-        return ans;
+        return prefix;
 
 
     }
